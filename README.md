@@ -1,34 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Votium → ZK Snark Based Voting
 
-## Getting Started
+## Problem Statement
 
-First, run the development server:
+Voting on public chains like Ethereum comes with the problem of anonymity. Wallet Addresses are prone to chain analysis at the same time some voting motions are only possible if the public address of the person is linked with a real world Identity, one example being public election of local leaders.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+For voting to happen on any kind of motion, there are 2 requirements:
+1.  The smart contract needs to know all eligible public addresses that can vote on this motion
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. The votes should be anonymous, i.e reading the public ledger of ethereum no one should be able to figure out who voted for whom.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+**The Point 2. is a very big problem! How do u provide anonymity while voting on a public 
+blockchain, this is what Votium aims to solve via ZK SNARKS.**
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Votium provides a framework { zKCircuits + Smart Contracts } for people to make their voting motions on top of it.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Anyone who has created a motion can provide an input of the list of public voting keys that are allowed to vote { voting keys are like voting IDs which can recognise a public address. }
+- Anyone who is allowed to vote for that motion can produce a proof that they are indeed allowed to vote and then also provide what their vote is. **The proof will not have the voting key of the voter, hence the smart contract will be able to verify whether a given vote is valid or not without ever knowing the public identity of the person who is voting!**
 
-## Learn More
+The below diagrams explains the difference between traditional voting on Ethereum { or any other public blockchain } vs anonymous voting via Votium.
 
-To learn more about Next.js, take a look at the following resources:
+Traditional Voting:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+You send your vote to the smart contract, everyone knows what you have voted, you are suspectible to chain analysis and at the same time this limits the kind of voting you can have on the chain! You can’t do an election or any kind of voting that requires the voting key to be linked with some sort of centralised identity.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/74a97def-631e-4455-84a1-5d28fefdc508/Untitled.png)
 
-## Deploy on Vercel
+Voting via Votium:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Instead of sending your vote to the smart contract, you generate a ZK Proof on ur system, this proof can prove to the smart contract that you are eligible to vote, it tells it what your vote is but at the same time doesn’t reveal your voter id. You relay your vote through a relayer which basically passes your vote to the smart contract, this makes your vote completely anonymous on a public chain as the smart contract can verify whether a vote is legit or not but it can’t figure out who has voted via it!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9543b981-e5ff-4733-9094-7525c4f3013d/Untitled.png)
+
+What about double spending?
+
+With the proof you send the Hash of your voting key {changing the Hash would corrupt the proof and hence it won’t get verified!}, it is saved in the smart contract and after the first vote if you try to use the proof again, it won’t accept it since it already has the hash associated with that given proof! Making double spending impossible here! 
+
+## Demo
+
+---
+
+Here is a small demo built on top of Votium, the UI is minimal to show basic functionalities, since Votium is a framework, you can build as complex voting DApps you want on top of it!
+
+### Adding a Voter
+
+---
+
+When someone creates a motion on Votium, they can add a list of voters that can vote on the given motion.
+
+Below is a demo of the same with a minimalistic UI. The Voter is being added and once added they can vote anonymously via zk SNARKS.
+
+![adding a voter.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/017310ed-27c3-4383-8409-003e5252791c/adding_a_voter.gif)
+
+### Generating a Proof
+
+---
+
+Once a voter is added, a voter can generate off chain vote on their system, for the demo a cli is used but in production it will go either with a plugin or a native app like 1password.
+
+![generating_proof_original.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c84185b4-3652-4d4f-94ba-4884264a6032/generating_proof_original.gif)
+
+### Submitting a Vote
+
+---
+
+Submit a vote requires providing a proof along with your vote, the proof doesn’t contain any reference to your on-chain credentials but the smart contract can still verify whether it is coming from a legitimate voter or not.
+
+The Hash of the voting-key is recorded on the smart contract making double-spendin, i.e voting twice impossible and still protecting the credential of the voter { because hashing is a one way function }.
+
+  
+
+![voting.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/db5df934-579b-4bd0-861a-5046c78da84a/voting.gif)
