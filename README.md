@@ -23,13 +23,13 @@ Traditional Voting:
 
 You send your vote to the smart contract, everyone knows what you have voted, you are suspectible to chain analysis and at the same time this limits the kind of voting you can have on the chain! You can’t do an election or any kind of voting that requires the voting key to be linked with some sort of centralised identity.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/74a97def-631e-4455-84a1-5d28fefdc508/Untitled.png)
+![Untitled](https://cloud-izsid6re1-hack-club-bot.vercel.app/0image.png)
 
 Voting via Votium:
 
 Instead of sending your vote to the smart contract, you generate a ZK Proof on ur system, this proof can prove to the smart contract that you are eligible to vote, it tells it what your vote is but at the same time doesn’t reveal your voter id. You relay your vote through a relayer which basically passes your vote to the smart contract, this makes your vote completely anonymous on a public chain as the smart contract can verify whether a vote is legit or not but it can’t figure out who has voted via it!
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9543b981-e5ff-4733-9094-7525c4f3013d/Untitled.png)
+![Untitled](https://cloud-nhtspgez5-hack-club-bot.vercel.app/0image.png)
 
 What about double spending?
 
@@ -49,7 +49,7 @@ When someone creates a motion on Votium, they can add a list of voters that can 
 
 Below is a demo of the same with a minimalistic UI. The Voter is being added and once added they can vote anonymously via zk SNARKS.
 
-![adding a voter.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/017310ed-27c3-4383-8409-003e5252791c/adding_a_voter.gif)
+![adding a voter.gif](https://cloud-mu5jq9p8q-hack-club-bot.vercel.app/0final_video.mp4)
 
 ### Generating a Proof
 
@@ -57,7 +57,7 @@ Below is a demo of the same with a minimalistic UI. The Voter is being added and
 
 Once a voter is added, a voter can generate off chain vote on their system, for the demo a cli is used but in production it will go either with a plugin or a native app like 1password.
 
-![generating_proof_original.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c84185b4-3652-4d4f-94ba-4884264a6032/generating_proof_original.gif)
+![generating_proof_original.gif](https://cloud-1eytkarws-hack-club-bot.vercel.app/0generating_proof_original.gif)
 
 ### Submitting a Vote
 
@@ -69,4 +69,4 @@ The Hash of the voting-key is recorded on the smart contract making double-spend
 
   
 
-![voting.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/db5df934-579b-4bd0-861a-5046c78da84a/voting.gif)
+![voting.gif](https://cloud-cguwtec9h-hack-club-bot.vercel.app/0voting.gif)
