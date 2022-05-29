@@ -49,7 +49,7 @@ When someone creates a motion on Votium, they can add a list of voters that can 
 
 Below is a demo of the same with a minimalistic UI. The Voter is being added and once added they can vote anonymously via zk SNARKS.
 
-![adding a voter.gif](https://cloud-mu5jq9p8q-hack-club-bot.vercel.app/0final_video.mp4)
+![adding a voter.gif](https://cloud-5z1zvpb9s-hack-club-bot.vercel.app/0adding_a_voter.gif)
 
 ### Generating a Proof
 
