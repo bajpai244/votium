@@ -1,5 +1,7 @@
 # Votium → ZK Snark Based Voting
 
+*Votium [won](https://devfolio.co/projects/votium-f468) the in the ethereum track of Warpseed a Hackathon by lightspeed network 🚀*
+
 ## Problem Statement
 
 Voting on public chains like Ethereum comes with the problem of anonymity. Wallet Addresses are prone to chain analysis at the same time some voting motions are only possible if the public address of the person is linked with a real world Identity, one example being public election of local leaders.
