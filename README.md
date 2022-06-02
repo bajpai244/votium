@@ -1,6 +1,6 @@
 # Votium → ZK Snark Based Voting
 
-**Votium [won](https://devfolio.co/projects/votium-f468) the in the ethereum track of Warpseed a Hackathon by lightspeed network 🚀**
+**Votium [won](https://devfolio.co/projects/votium-f468) in the ethereum track of Warpseed a Hackathon by lightspeed network 🚀**
 
 ## Problem Statement
 
